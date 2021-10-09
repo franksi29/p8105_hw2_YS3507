@@ -1,0 +1,20 @@
+---
+title: "hw2"
+author: "Yu Si"
+date: "10/9/2021"
+output: github_document
+---
+```{r}
+library(tidyverse)
+library(readxl)
+library(haven)
+```
+
+##1
+```{r}
+trash_data = read_excel("./Trash-Wheel-Collection-Totals-7-2020-2.xlsx", col_names = TRUE, range = "A2:N534")%>% 
+  janitor::clean_names() %>% 
+  drop_na(dumpster) %>% 
+  mutate(sports_balls = round(sports_balls))
+```
+

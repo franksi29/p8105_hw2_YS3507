@@ -23,11 +23,19 @@ library(readxl)
 library(haven)
 ```
 
-\#\#1
+\#\#Problem 1
 
 ``` r
 trash_data = read_excel("./Trash-Wheel-Collection-Totals-7-2020-2.xlsx", col_names = TRUE, range = "A2:N534")%>% 
   janitor::clean_names() %>% 
   drop_na(dumpster) %>% 
   mutate(sports_balls = round(sports_balls))
+
+
+data_2018 = read_excel("./Trash-Wheel-Collection-Totals-7-2020-2.xlsx", sheet = 7, range = "A2:B14") %>% 
+  drop_na() %>% 
+  mutate(Year = "2018")
+data_2019 = read_excel("./Trash-Wheel-Collection-Totals-7-2020-2.xlsx", sheet = 6, range = "A2:B14") %>% 
+  drop_na() %>% 
+  mutate(Year = "2019")
 ```

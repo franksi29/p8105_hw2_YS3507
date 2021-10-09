@@ -43,4 +43,18 @@ data_2019 = read_excel("./Trash-Wheel-Collection-Totals-7-2020-2.xlsx", sheet = 
 #Combine precipitation datasets and convert month to a character variable 
 data_2018_2019 = bind_rows(data_2018, data_2019) %>% 
   mutate(Month = month.name[Month])
+
+total_2018 = sum(pull(data_2018, Total))
+trash_2019 = filter(trash_data, year == "2019")
+sports_balls_median_2019 = median(pull(trash_2019, sports_balls))
 ```
+
+In the trash\_data, there are 344 rows and 14 columns. There are
+“dumpster”,“month”,“year”, “date”, “weight\_tons”,
+“volume\_cubic\_yards”, “plastic\_bottles”, “polystyrene”,
+“cigarette\_butts”, “glass\_bottles”, “grocery\_bags”, “chip\_bags”,
+“sports\_balls”, “homes\_powered” observations. In data\_2018, there are
+6 rows and 3 columns. There are “Month” “Total” “Year” observations. In
+data\_2019, there are 12 rows and 14 columns. There are “Month” “Total”
+“Year” observations. the total precipitation in 2018 is 70.33. the
+median number of sports balls in a dumpster in 2019 is 9.

@@ -12,12 +12,13 @@ library(haven)
 
 ##Problem 1
 ```{r}
+# Read and clean the Mr. Trash Wheel sheet
 trash_data = read_excel("./Trash-Wheel-Collection-Totals-7-2020-2.xlsx", col_names = TRUE, range = "A2:N534")%>% 
   janitor::clean_names() %>% 
   drop_na(dumpster) %>% 
   mutate(sports_balls = round(sports_balls))
 
-
+#Read and clean precipitation data for 2018 and 2019. 
 data_2018 = read_excel("./Trash-Wheel-Collection-Totals-7-2020-2.xlsx", sheet = 7, range = "A2:B14") %>% 
   drop_na() %>% 
   mutate(Year = "2018")
@@ -25,6 +26,8 @@ data_2019 = read_excel("./Trash-Wheel-Collection-Totals-7-2020-2.xlsx", sheet = 
   drop_na() %>% 
   mutate(Year = "2019")
 
-
+#Combine precipitation datasets and convert month to a character variable 
+data_2018_2019 = bind_rows(data_2018, data_2019) %>% 
+  mutate(Month = month.name[Month])
 ```
 

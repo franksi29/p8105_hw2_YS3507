@@ -150,3 +150,18 @@ snp_pols_unemployment_data = pols_month %>%
     ## Joining, by = c("year", "month")
 
     ## Joining, by = c("year", "month")
+
+In the first dataset, pols\_month, there are 822 rows and 9 columns. it
+contains year, month, date, and relative number of senators,
+representatives, governors in two parties.
+
+In the second dataset, snp, there are 787 rows and 4 columns. it
+contains year, month, date and close value.
+
+In the third dataset, unemployment, there are 816 rows and 3 columns. it
+contains year, month and unemployment value.
+
+In the resulting dataset, there are 822 rows and 12 columns. the range
+of years is from 1947 to 2015. the key variables are “year” , “month” ,
+“gov\_gop”, “sen\_gop”, “rep\_gop”, “gov\_dem”, “sen\_dem”, “rep\_dem”,
+“president”, “day”, “close”, “unemployment”.

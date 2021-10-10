@@ -189,3 +189,24 @@ baby_data = read_csv("Popular_Baby_Names.csv") %>%
     ## 
     ## ℹ Use `spec()` to retrieve the full column specification for this data.
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
+olivia_data = filter(baby_data, childs_first_name == "olivia") %>% 
+  select(-gender, -count, -childs_first_name) %>% 
+  pivot_wider(
+    names_from = "year_of_birth",
+    values_from = "rank"
+  )
+  
+male_most_data = filter(baby_data, gender == "male", rank == "1")  %>% 
+  select(-gender, -rank, -count) %>% 
+  pivot_wider(
+    names_from = "year_of_birth",
+    values_from = "childs_first_name"
+  )
+
+male_non_hispanic_2016 = filter(baby_data, year_of_birth == "2016", gender =="male", ethnicity != "hispanic" )
+ggplot(male_non_hispanic_2016, aes(x = pull(male_non_hispanic_2016, rank), y = pull(male_non_hispanic_2016, count))) + geom_point()
+```
+
+![](HW_2_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->

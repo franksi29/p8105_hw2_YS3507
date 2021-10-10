@@ -111,5 +111,21 @@ baby_data = read_csv("Popular_Baby_Names.csv") %>%
   mutate(gender = str_to_lower(gender)) %>% 
   mutate(ethnicity, ethnicity = recode(ethnicity, "black non hisp" = "black non hispanic", "white non hisp" = "white non hispanic", "asian and paci" = "asian and pacific islander"))
 
+olivia_data = filter(baby_data, childs_first_name == "olivia") %>% 
+  select(-gender, -count, -childs_first_name) %>% 
+  pivot_wider(
+    names_from = "year_of_birth",
+    values_from = "rank"
+  )
+  
+male_most_data = filter(baby_data, gender == "male", rank == "1")  %>% 
+  select(-gender, -rank, -count) %>% 
+  pivot_wider(
+    names_from = "year_of_birth",
+    values_from = "childs_first_name"
+  )
+
+male_non_hispanic_2016 = filter(baby_data, year_of_birth == "2016", gender =="male", ethnicity != "hispanic" )
+ggplot(male_non_hispanic_2016, aes(x = pull(male_non_hispanic_2016, rank), y = pull(male_non_hispanic_2016, count))) + geom_point()
 ```
 

@@ -23,7 +23,7 @@ library(readxl)
 library(haven)
 ```
 
-\#\#Problem 1
+# Problem 1
 
 ``` r
 # Read and clean the Mr. Trash Wheel sheet
@@ -59,7 +59,7 @@ data\_2019, there are 12 rows and 14 columns. There are “Month” “Total”
 “Year” observations. the total precipitation in 2018 is 70.33. the
 median number of sports balls in a dumpster in 2019 is 9.
 
-\#\#Problem 2
+# Problem 2
 
 ``` r
 # clean the data in pols-month.csv. 
@@ -165,3 +165,27 @@ In the resulting dataset, there are 822 rows and 12 columns. the range
 of years is from 1947 to 2015. the key variables are “year” , “month” ,
 “gov\_gop”, “sen\_gop”, “rep\_gop”, “gov\_dem”, “sen\_dem”, “rep\_dem”,
 “president”, “day”, “close”, “unemployment”.
+
+# Problem 3
+
+``` r
+baby_data = read_csv("Popular_Baby_Names.csv") %>% 
+  janitor::clean_names() %>% 
+  distinct() %>% 
+  arrange(year_of_birth) %>% 
+  mutate(ethnicity = str_to_lower(ethnicity)) %>% 
+  mutate(childs_first_name = str_to_lower(childs_first_name)) %>% 
+  mutate(gender = str_to_lower(gender)) %>% 
+  mutate(ethnicity, ethnicity = recode(ethnicity, "black non hisp" = "black non hispanic", "white non hisp" = "white non hispanic", "asian and paci" = "asian and pacific islander"))
+```
+
+    ## Rows: 19418 Columns: 6
+
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (3): Gender, Ethnicity, Child's First Name
+    ## dbl (3): Year of Birth, Count, Rank
+
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
